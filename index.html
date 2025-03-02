@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OJOGOONLINE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #ffcc00;
+            color: black;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .tabela {
+            background-color: #222;
+            padding: 20px;
+            margin: 15px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+            cursor: pointer;
+            text-align: center;
+        }
+        .tabela h2 {
+            margin: 0;
+            padding: 15px;
+            background-color: #ffcc00;
+            color: black;
+            border-radius: 10px 10px 0 0;
+        }
+        .palpites {
+            display: none;
+            padding: 10px;
+            text-align: left;
+        }
+        .emoji {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>🎰 OJOGOONLINE 🐾</header>
+    <div class="container">
+        <div class="tabela" onclick="mostrarPalpites(this)">
+            <h2>FEDERAL</h2>
+            <div class="palpites"></div>
+        </div>
+        <div class="tabela" onclick="mostrarPalpites(this)">
+            <h2>RIO</h2>
+            <div class="palpites"></div>
+        </div>
+        <div class="tabela" onclick="mostrarPalpites(this)">
+            <h2>LOOK/GO</h2>
+            <div class="palpites"></div>
+        </div>
+        <div class="tabela" onclick="mostrarPalpites(this)">
+            <h2>NACIONAL</h2>
+            <div class="palpites"></div>
+        </div>
+        <div class="tabela" onclick="mostrarPalpites(this)">
+            <h2>MALUCA/BA</h2>
+            <div class="palpites"></div>
+        </div>
+    </div>
+    <script>
+        const animais = [
+            { nome: "Avestruz", emoji: "🦢" }, { nome: "Águia", emoji: "🦅" },
+            { nome: "Burro", emoji: "🐴" }, { nome: "Borboleta", emoji: "🦋" },
+            { nome: "Cachorro", emoji: "🐕" }, { nome: "Cabra", emoji: "🐐" },
+            { nome: "Carneiro", emoji: "🐏" }, { nome: "Camelo", emoji: "🐫" },
+            { nome: "Cobra", emoji: "🐍" }, { nome: "Coelho", emoji: "🐇" },
+            { nome: "Cavalo", emoji: "🐎" }, { nome: "Elefante", emoji: "🐘" },
+            { nome: "Galo", emoji: "🐔" }, { nome: "Gato", emoji: "🐱" },
+            { nome: "Jacaré", emoji: "🐊" }, { nome: "Leão", emoji: "🦁" },
+            { nome: "Macaco", emoji: "🐒" }, { nome: "Porco", emoji: "🐖" },
+            { nome: "Pavão", emoji: "🦚" }, { nome: "Peru", emoji: "🦃" },
+            { nome: "Touro", emoji: "🐂" }, { nome: "Tigre", emoji: "🐯" },
+            { nome: "Urso", emoji: "🐻" }, { nome: "Veado", emoji: "🦌" },
+            { nome: "Vaca", emoji: "🐄" }
+        ];
+
+        function gerarPalpites() {
+            let palpites = "<h3>Milhares:</h3><ul>";
+            for (let i = 0; i < 10; i++) {
+                let milhar = ("000" + Math.floor(Math.random() * 10000)).slice(-4);
+                let grupo = Math.floor(Math.random() * 25);
+                palpites += `<li>${milhar} - ${animais[grupo].emoji} ${animais[grupo].nome}</li>`;
+            }
+            palpites += "</ul><h3>Grupos:</h3><ul>";
+            for (let i = 0; i < 5; i++) {
+                let grupo = Math.floor(Math.random() * 25);
+                palpites += `<li>${(grupo + 1).toString().padStart(2, '0')} - ${animais[grupo].emoji} ${animais[grupo].nome}</li>`;
+            }
+            palpites += "</ul>";
+            return palpites;
+        }
+
+        function mostrarPalpites(element) {
+            let palpitesDiv = element.querySelector(".palpites");
+            if (palpitesDiv.innerHTML === "") {
+                palpitesDiv.innerHTML = gerarPalpites();
+            }
+            palpitesDiv.style.display = palpitesDiv.style.display === "none" || palpitesDiv.style.display === "" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>
