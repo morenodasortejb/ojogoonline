@@ -102,11 +102,17 @@
             { nome: "Vaca", emoji: "🐄" }
         ];
 
+        function obterGrupoPorMilhar(milhar) {
+            let dezena = parseInt(milhar.slice(-2));
+            let grupo = Math.floor((dezena - 1) / 4);
+            return grupo >= 0 && grupo < 25 ? grupo : 24;
+        }
+
         function gerarPalpites() {
             let palpites = "<h3>Milhares:</h3><ul>";
             for (let i = 0; i < 10; i++) {
                 let milhar = ("000" + Math.floor(Math.random() * 10000)).slice(-4);
-                let grupo = Math.floor(Math.random() * 25);
+                let grupo = obterGrupoPorMilhar(milhar);
                 palpites += `<li>${milhar} - ${animais[grupo].emoji} ${animais[grupo].nome}</li>`;
             }
             palpites += "</ul><h3>Grupos:</h3><ul>";
@@ -120,9 +126,7 @@
 
         function mostrarPalpites(element) {
             let palpitesDiv = element.querySelector(".palpites");
-            if (palpitesDiv.innerHTML === "") {
-                palpitesDiv.innerHTML = gerarPalpites();
-            }
+            palpitesDiv.innerHTML = gerarPalpites();
             palpitesDiv.style.display = palpitesDiv.style.display === "none" || palpitesDiv.style.display === "" ? "block" : "none";
         }
     </script>
